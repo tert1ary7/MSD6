@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSD v6.0 | Global Metabolism</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="command-center">
+        <!-- Header Telemetry -->
+        <header class="msd-header">
+            <div class="brand">
+                <h1>CHASING THE SUN</h1>
+                <h2>GLOBAL LICENSE METABOLISM | MSD v6.0</h2>
+            </div>
+            <div class="kpi-group">
+                <div class="kpi">
+                    <span class="label">ACTIVE PULSES</span>
+                    <span id="stat-pulses" class="value cyan">3,450</span>
+                </div>
+                <div class="kpi">
+                    <span class="label">CRITICAL ACTIONS</span>
+                    <span id="stat-critical" class="value amber">1</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Geographic Viewport -->
+        <main class="viewport">
+            <!-- Simulated daylight terminator sweep -->
+            <div class="terminator-sweep"></div>
+            
+            <!-- SVG Overlay for Data Nodes and Chords -->
+            <svg id="data-layer" class="map-overlay" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice">
+                <!-- Chords drawn via JS -->
+                <g id="chords"></g>
+                <!-- Nodes drawn via JS -->
+                <g id="nodes"></g>
+            </svg>
+        </main>
+
+        <!-- Timezone Metabolism Ribbon -->
+        <footer class="metabolism-ribbon">
+            <div class="ribbon-label">TIMEZONE METABOLISM RIBBON</div>
+            <div class="ribbon-track" id="ribbon-track">
+                <!-- Populated via JS -->
+            </div>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
