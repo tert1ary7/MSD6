@@ -1,0 +1,147 @@
+:root {
+    --bg-base: #0a0e14;
+    --panel-bg: rgba(16, 24, 32, 0.8);
+    --cyan: #00f2fe;
+    --amber: #f59e0b;
+    --text-dim: #64748b;
+    --text-bright: #e2e8f0;
+    --grid-line: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-base);
+    color: var(--text-bright);
+    font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.command-center {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background: radial-gradient(circle at center, #111827 0%, #000000 100%);
+}
+
+/* Header */
+.msd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--grid-line);
+    margin-bottom: 20px;
+}
+.brand h1 { margin: 0; font-size: 24px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
+.brand h2 { margin: 5px 0 0 0; font-size: 11px; color: var(--text-dim); letter-spacing: 1px; }
+.kpi-group { display: flex; gap: 30px; }
+.kpi { display: flex; align-items: baseline; gap: 10px; }
+.kpi .label { font-size: 10px; color: var(--text-dim); font-weight: 700; letter-spacing: 1px; }
+.kpi .value { font-size: 20px; font-weight: 400; font-family: monospace; }
+.cyan { color: var(--cyan); text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
+.amber { color: var(--amber); text-shadow: 0 0 10px rgba(245, 158, 11, 0.5); }
+
+/* Viewport & Map */
+.viewport {
+    flex-grow: 1;
+    position: relative;
+    border: 1px solid var(--grid-line);
+    border-radius: 4px;
+    overflow: hidden;
+    /* Abstract dot-matrix world map placeholder */
+    background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.terminator-sweep {
+    position: absolute;
+    top: 0; bottom: 0; width: 200%;
+    background: linear-gradient(90deg, 
+        rgba(10,14,20,0.9) 0%, 
+        rgba(0,242,254,0.05) 50%, 
+        rgba(10,14,20,0.9) 100%);
+    animation: sweep 60s linear infinite;
+    pointer-events: none;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+
+/* SVG Elements */
+.chord {
+    fill: none;
+    stroke: var(--cyan);
+    stroke-width: 1.5;
+    opacity: 0.4;
+    stroke-dasharray: 4 4;
+    animation: dash 20s linear infinite;
+}
+.chord.conflict { stroke: var(--amber); opacity: 0.8; }
+.node-hex {
+    fill: rgba(0, 242, 254, 0.1);
+    stroke: var(--cyan);
+    stroke-width: 2;
+    transition: all 0.3s;
+}
+.node-hex.active {
+    fill: rgba(0, 242, 254, 0.4);
+    filter: drop-shadow(0 0 8px var(--cyan));
+    animation: pulse-node 2s infinite;
+}
+.node-hex.amber {
+    stroke: var(--amber);
+    fill: rgba(245, 158, 11, 0.2);
+    filter: drop-shadow(0 0 8px var(--amber));
+}
+.node-label {
+    fill: var(--text-bright);
+    font-size: 12px;
+    font-family: monospace;
+    pointer-events: none;
+}
+
+/* Ribbon */
+.metabolism-ribbon {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--grid-line);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.ribbon-label { font-size: 10px; color: var(--text-dim); font-weight: 700; letter-spacing: 1px; }
+.ribbon-track {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+}
+.region-block {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border-left: 2px solid var(--text-dim);
+    padding-left: 10px;
+    position: relative;
+}
+.region-name { position: absolute; top: -15px; font-size: 10px; color: var(--text-bright); }
+.hex-indicator {
+    width: 12px; height: 14px; margin-right: 4px;
+    background: var(--grid-line);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.hex-indicator.on { background: var(--cyan); box-shadow: 0 0 5px var(--cyan); }
+.hex-indicator.warn { background: var(--amber); }
+
+/* Animations */
+@keyframes sweep { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+@keyframes dash { to { stroke-dashoffset: -100; } }
+@keyframes pulse-node { 
+    0% { transform: scale(1); opacity: 0.8; } 
+    50% { transform: scale(1.1); opacity: 1; } 
+    100% { transform: scale(1); opacity: 0.8; } 
+}
